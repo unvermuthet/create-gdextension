@@ -1,0 +1,45 @@
+# Godot auto generated files
+.godot/
+
+# Secrets
+export.cfg
+export_credentials.cfg
+
+# Ignore custom.py
+custom.py
+
+# Ignore generated compile_commands.json
+compile_commands.json
+
+# Ignore files generated for documentation
+/src/gen
+*.gen.*
+
+# Binaries
+*.dll
+*.a
+*.o
+*.os
+*.so
+*.obj
+*.bc
+*.pyc
+*.dblite
+*.pdb
+*.lib
+*.config
+*.creator
+*.creator.user
+*.files
+*.includes
+*.idb
+*.exp
+
+# Other stuff
+*.log
+
+# VSCode
+.DS_Store
+
+# Jetbrains
+.idea/

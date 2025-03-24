@@ -1,0 +1,10 @@
+{
+	"cmake.options.statusBarVisibility": "hidden",
+	"cmake.ignoreCMakeListsMissing": true,
+	"C_Cpp.formatting": "clangFormat",
+	"editor.formatOnSave": true,
+	"editor.formatOnSaveMode": "modifications",
+	"files.exclude": {
+		"**/*.os": true
+	}
+}

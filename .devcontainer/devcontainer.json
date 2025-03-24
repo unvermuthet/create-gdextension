@@ -1,0 +1,25 @@
+{
+	"name": "C++",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "3.11"
+		},
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"./godot": {
+			"version": "4.4-stable"
+		}
+	},
+	"postCreateCommand": "python3 -m pip install -r requirements.txt",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"xaver.clang-format",
+				"ms-vscode.cpptools-extension-pack",
+				"EditorConfig.EditorConfig"
+			]
+		}
+	}
+}

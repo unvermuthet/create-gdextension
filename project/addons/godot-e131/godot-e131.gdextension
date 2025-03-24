@@ -1,0 +1,12 @@
+[configuration]
+
+entry_symbol = "my_gdextension_init"
+compatibility_minimum = "4.4"
+reloadable = false
+
+[libraries]
+
+linux.x86_64.single = "bin/linux/libmy-gdextension.linux.template_debug.x86_64.so"
+linux.arm64.single = "bin/linux/libmy-gdextension.linux.template_debug.arm64.so"
+windows.x86_64.single = "bin/windows/libmy-gdextension.windows.template_debug.x86_64.dll"
+macos.single = "bin/macos/libmy-gdextension.macos.template_debug.universal.dylib"

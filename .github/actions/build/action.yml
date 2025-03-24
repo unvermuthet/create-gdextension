@@ -1,0 +1,51 @@
+name: GDExtension Build
+description: Build GDExtension
+
+inputs:
+  platform:
+    required: true
+    description: Target platform.
+  arch:
+    required: true
+    description: Target architecture.
+  float-precision:
+    default: "single"
+    description: Float precision (single or double).
+  target-type:
+    default: "template_debug"
+    description: Build type (template_debug or template_release).
+  scons-arguments:
+    default: ""
+    description: Additional arguments to pass to SCons.
+  scons-cache:
+    default: ".scons-cache/"
+    description: Scons cache folder name, relative to each scons directory. Must not contain relative path signifiers (. or ..). Must be a transparent path part (empty or 'path/to/directory/', ending in a slash).
+
+runs:
+  using: composite
+  steps:
+    - name: Setup godot-cpp
+      uses: ./godot-cpp/.github/actions/setup-godot-cpp
+      with:
+        platform: ${{ inputs.platform }}
+        mingw-version: ""
+
+    - name: Restore .scons_cache
+      if: ${{ inputs.scons-cache }}
+      uses: ./godot-cpp/.github/actions/godot-cache-restore
+      with:
+        scons-cache: ${{ inputs.scons-cache }}
+        cache-name: ${{ inputs.platform }}_${{ inputs.arch }}_${{ inputs.float-precision }}_${{ inputs.target-type }}
+
+    - name: Run SCons
+      shell: sh
+      env:
+        SCONS_CACHE: ${{ inputs.scons-cache }}
+      run: |
+        scons ${{ inputs.scons-arguments }} target=${{ inputs.target-type }} platform=${{ inputs.platform }} arch=${{ inputs.arch }} precision=${{ inputs.float-precision }}
+
+    - name: Save .scons_cache
+      uses: ./godot-cpp/.github/actions/godot-cache-save
+      with:
+        scons-cache: ${{ inputs.scons-cache }}
+        cache-name: ${{ inputs.platform }}_${{ inputs.arch }}_${{ inputs.float-precision }}_${{ inputs.target-type }}
