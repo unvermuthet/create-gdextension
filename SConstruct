@@ -61,10 +61,9 @@ library = env.SharedLibrary(libraryPath, source=sources)
 
 # Copy the addonFolder to install_in
 if env.get("install_dir", None):
-    install = env.Command(
-        os.path.join(env["install_dir"], os.path.basename(addonFolder)),
+    install = env.Install(
+        env["install_dir"],
         addonFolder,
-        Copy("$TARGET", "$SOURCE")
     )
     Default([library, install])
 else:
