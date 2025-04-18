@@ -7,9 +7,11 @@
         "version": {
             "type": "string",
             "proposals": [
-                "4.4-stable"
+				"4.2-stable",
+                "4.4-stable",
+                "4.4.1-stable"
             ],
-            "default": "4.4-stable",
+            "default": "4.4.1-stable",
             "description": "Select a release version"
         }
     },

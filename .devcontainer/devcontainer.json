@@ -6,7 +6,7 @@
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {},
 		"./godot": {
-			"version": "4.4-stable"
+			"version": "4.4.1-stable"
 		}
 	},
 	"postCreateCommand": "python3 -m pip install -r requirements.txt",

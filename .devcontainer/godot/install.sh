@@ -3,7 +3,7 @@ set -e
 
 echo "Installing Godot"
 
-VERSION=${VERSION:-4.4-stable}
+VERSION=${VERSION:-4.4.1-stable}
 echo "The provided version is: $VERSION"
 
 cd /tmp
