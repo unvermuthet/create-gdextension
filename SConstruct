@@ -30,13 +30,7 @@ opts.Update(env)
 env.Help(opts.GenerateHelpText(env))
 
 # Check if the godot-cpp submodule is initialized
-
-submodule_initialized = False
-if os.path.isdir("godot-cpp"):
-    if os.listdir("godot-cpp"):
-        submodule_initialized = True
-
-if not submodule_initialized:
+if not (os.path.isdir("godot-cpp") and os.listdir("godot-cpp")):
     print("""godot-cpp is not available within this folder, as Git submodules haven't been initialized.
 Run the following command to download godot-cpp:
 
