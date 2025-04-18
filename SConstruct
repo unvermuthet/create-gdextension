@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 import os
 import sys
-from SCons.Script import Environment, SConscript, Default, Glob, Variables, Help, PathVariable
+from SCons.Script import Environment, SConscript, Default, Glob, Variables, PathVariable, Import, Copy
 
 extensionName = "my-gdextension"
 
-env = Environment()
+try:
+    Import("env")
+except Exception:
+    env = Environment()
 
 # Build profiles can be used to decrease compile times.
 # You can either specify "disabled_classes", OR
@@ -13,16 +16,14 @@ env = Environment()
 # Modify the example file as needed and uncomment the line below or
 # manually specify the build_profile parameter when running SCons.
 
-# env["build_profile"] = "build_profile.json"
-
-env["install_dir"] = None
+# env["build_profile"] = env.File("build_profile.json").path
 
 opts = Variables()
 
 opts.Add(PathVariable(
     key="install_dir",
     help="Directory to copy the addon folder into",
-    default=env["install_dir"],
+    default=env.get("install_dir", None),
     validator=PathVariable.PathIsDirCreate
 ))
 
@@ -59,9 +60,9 @@ libraryPath = f"{addonFolder}/bin/{env['platform']}/{libraryFile}"
 library = env.SharedLibrary(libraryPath, source=sources)
 
 # Copy the addonFolder to install_in
-if env["install_dir"]:
+if env.get("install_dir", None):
     install = env.Command(
-        f"{env['install_dir']}/{extensionName}",
+        os.path.join(env["install_dir"], os.path.basename(addonFolder)),
         addonFolder,
         Copy("$TARGET", "$SOURCE")
     )
