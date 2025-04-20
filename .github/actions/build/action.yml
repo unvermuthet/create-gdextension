@@ -30,6 +30,12 @@ runs:
         platform: ${{ inputs.platform }}
         mingw-version: ""
 
+    - name: Setup OSXCross
+      if: ${{ matrix.target.platform == 'macos' && runner.os == 'Linux' }}
+      uses: mbround18/setup-osxcross@v2
+      with:
+        osx-version: "12.3"
+
     - name: Restore .scons_cache
       if: ${{ inputs.scons-cache }}
       uses: ./godot-cpp/.github/actions/godot-cache-restore
@@ -41,8 +47,9 @@ runs:
       shell: sh
       env:
         SCONS_CACHE: ${{ inputs.scons-cache }}
+        OSXCROSS_ROOT: ${{ env.OSXCROSS_TARGET }}/..
       run: |
-        scons ${{ inputs.scons-arguments }} target=${{ inputs.target-type }} platform=${{ inputs.platform }} arch=${{ inputs.arch }} precision=${{ inputs.float-precision }}
+        scons ${{ inputs.scons-arguments }} target=${{ inputs.target-type }} platform=${{ inputs.platform }} arch=${{ inputs.arch }} precision=${{ inputs.float-precision }} osxcross_sdk=darwin21.4
 
     - name: Save .scons_cache
       uses: ./godot-cpp/.github/actions/godot-cache-save
