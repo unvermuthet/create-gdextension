@@ -38,7 +38,7 @@ runs:
 
     - name: Restore .scons_cache
       if: ${{ inputs.scons-cache }}
-      uses: godotengine/godot-cpp/.github/actions/setup-godot-cpp@4.4
+      uses: godotengine/godot-cpp/.github/actions/godot-cache-restore@4.4
       with:
         scons-cache: ${{ inputs.scons-cache }}
         cache-name: ${{ inputs.platform }}_${{ inputs.arch }}_${{ inputs.float-precision }}_${{ inputs.target-type }}
@@ -52,7 +52,7 @@ runs:
         scons ${{ inputs.scons-arguments }} target=${{ inputs.target-type }} platform=${{ inputs.platform }} arch=${{ inputs.arch }} precision=${{ inputs.float-precision }} osxcross_sdk=darwin21.4
 
     - name: Save .scons_cache
-      uses: godotengine/godot-cpp/.github/actions/setup-godot-cpp@4.4
+      uses: godotengine/godot-cpp/.github/actions/godot-cache-save@4.4
       with:
         scons-cache: ${{ inputs.scons-cache }}
         cache-name: ${{ inputs.platform }}_${{ inputs.arch }}_${{ inputs.float-precision }}_${{ inputs.target-type }}
