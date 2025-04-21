@@ -5,6 +5,7 @@
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers/features/python:1": {},
 		"./godot": {
 			"version": "4.4.1-stable"
 		}
