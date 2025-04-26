@@ -53,6 +53,11 @@ if env["target"] in ["editor", "template_debug"]:
     except AttributeError:
         print("Not including class reference as we're targeting a pre-4.3 baseline.")
 
+# Ensure consistency between tool-chains
+env["SHLIBPREFIX"] = "lib"
+if env["platform"] == "macos":
+    env["SHLIBSUFFIX"] = ".dylib"
+
 # Output shared library
 addonFolder = f"project/addons/{extensionName}"
 libraryFile = f"{extensionName}{env['suffix']}{env['SHLIBSUFFIX']}"
