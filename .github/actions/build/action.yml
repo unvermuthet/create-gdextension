@@ -24,6 +24,11 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Remove man-db
+      if: ${{ runner.os == 'Linux' }}
+      shell: sh
+      run: sudo apt remove --purge man-db
+
     - name: Setup godot-cpp
       uses: godotengine/godot-cpp/.github/actions/setup-godot-cpp@4.4
       with:
